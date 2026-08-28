@@ -1,0 +1,19 @@
+# Dependency directories
+node_modules/
+client/node_modules/
+
+# Production build output
+client/dist/
+
+# Environment files
+.env
+client/.env
+
+# Local agent configuration/logs
+.agents/
+.gemini/
+.crdownload
+
+# Operating System specific files
+.DS_Store
+Thumbs.db

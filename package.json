@@ -1,0 +1,11 @@
+{
+  "name": "zeeshan-portfolio",
+  "version": "1.0.0",
+  "description": "Frontend React Portfolio for Zeeshan Lateef",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix client",
+    "client": "npm run dev --prefix client",
+    "dev": "npm run client",
+    "build": "npm run build --prefix client"
+  }
+}
