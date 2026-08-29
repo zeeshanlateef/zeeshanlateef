@@ -25,7 +25,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden bg-[#08080f] border-b border-white/5">
+    <section id="about" className="py-16 relative overflow-hidden bg-[#08080f] border-b border-white/5">
 
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -65,7 +65,7 @@ const About = () => {
               {/* Profile Image Container */}
               <div className="relative w-56 h-56 rounded-2xl overflow-hidden border-2 border-primary/20 mb-6 shadow-xl group">
                 {imgError ? (
-                  <div className="w-full h-full bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-black font-display font-bold text-5xl select-none">
+                  <div className="w-full h-full bg-primary rounded-2xl flex items-center justify-center text-black font-display font-bold text-5xl select-none">
                     ZL
                   </div>
                 ) : (
@@ -79,7 +79,7 @@ const About = () => {
               </div>
 
               <h3 className="text-2xl font-display font-bold text-white mb-1">Zeeshan Lateef</h3>
-              <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-4">Full Stack Software Developer / Software Engineer</p>
+              <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-4">B.Tech | Full Stack Developer</p>
               
               <div className="w-full border-t border-white/5 my-4 pt-4 flex flex-col space-y-3 text-left px-2">
                 <div className="flex items-center text-gray-400 text-sm gap-3">
@@ -137,7 +137,7 @@ const About = () => {
                   Maulana Azad College of Engineering & Technology
                 </p>
                 <div className="flex items-center justify-between text-xs text-gray-400 font-medium pt-3 border-t border-white/5">
-                  <span>Period: 2019 – 2023</span>
+                  <span>Session: 2019 – 2023</span>
                   <span className="font-semibold text-primary">CGPA: 8.22 / 10</span>
                 </div>
               </div>

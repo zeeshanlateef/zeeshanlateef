@@ -104,12 +104,8 @@ const ParticleBackground = () => {
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             
-            // Gradient connecting lines for a cinematic aesthetic
-            const grad = ctx.createLinearGradient(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
-            grad.addColorStop(0, `rgba(0, 210, 255, ${alpha})`);
-            grad.addColorStop(1, `rgba(155, 81, 224, ${alpha})`);
-            
-            ctx.strokeStyle = grad;
+            // Solid stroke connecting lines for a cinematic aesthetic
+            ctx.strokeStyle = `rgba(0, 210, 255, ${alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }

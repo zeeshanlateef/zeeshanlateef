@@ -40,7 +40,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-24 relative overflow-hidden bg-[#08080f] border-b border-white/5">
+    <section id="experience" className="py-16 relative overflow-hidden bg-[#08080f] border-b border-white/5">
 
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">

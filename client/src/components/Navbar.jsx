@@ -22,6 +22,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const handleResumeClick = () => {
+    const downloadUrl = "https://drive.google.com/uc?export=download&id=1yZ8CXRFflC5JA8XKPOJvwh33MiG6QuhG";
+    let iframe = document.getElementById('resume-download-iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = 'resume-download-iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    iframe.src = downloadUrl;
+  };
+
   // Smooth scroll handler with route check
   const handleScrollTo = (e, href) => {
     e.preventDefault();
@@ -122,7 +134,7 @@ const Navbar = () => {
                 {activeSection === link.href.slice(1) && (
                   <motion.span
                     layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary to-secondary"
+                    className="absolute bottom-0 left-0 w-full h-[2px] bg-primary"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -136,6 +148,7 @@ const Navbar = () => {
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleResumeClick}
               className="px-4 py-2 text-xs font-semibold tracking-wide uppercase border border-white/10 rounded-full hover:border-primary/50 hover:text-primary transition-all duration-300 flex items-center gap-1"
             >
               Resume
@@ -177,7 +190,7 @@ const Navbar = () => {
                   transition={{ delay: idx * 0.05 }}
                   className={`text-2xl font-display font-medium block ${
                     activeSection === link.href.slice(1)
-                      ? 'bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent'
+                      ? 'text-primary'
                       : 'text-gray-400 hover:text-white'
                   }`}
                 >
@@ -196,9 +209,10 @@ const Navbar = () => {
                 href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 text-center text-sm font-semibold tracking-wide uppercase bg-gradient-to-r from-primary to-secondary text-black rounded-full hover:shadow-[0_0_20px_rgba(0,210,255,0.4)] transition-all duration-300"
+                onClick={handleResumeClick}
+                className="w-full py-4 text-center text-sm font-semibold tracking-wide uppercase bg-primary text-black rounded-full hover:shadow-[0_0_20px_rgba(0,210,255,0.4)] transition-all duration-300"
               >
-                Open Resume
+                Open & Download Resume
               </a>
 
               <div className="flex items-center justify-center space-x-6">

@@ -55,7 +55,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-24 relative overflow-hidden bg-[#05050a] border-b border-white/5">
+    <section id="skills" className="py-16 relative overflow-hidden bg-[#05050a] border-b border-white/5">
 
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -115,7 +115,7 @@ const Skills = () => {
                 </div>
 
                 {/* Accent line at the bottom */}
-                <div className="w-full h-[2px] bg-gradient-to-r from-primary/10 via-secondary/15 to-transparent mt-8 rounded-full" />
+                <div className="w-full h-[2px] bg-white/10 mt-8 rounded-full" />
               </TiltCard>
             </motion.div>
           ))}

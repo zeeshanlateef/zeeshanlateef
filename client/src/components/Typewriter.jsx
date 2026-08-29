@@ -43,7 +43,7 @@ const Typewriter = ({
 
   return (
     <span className="inline-block min-h-[1.5em]">
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-semibold font-display">
+      <span className="text-primary font-semibold font-display">
         {currentText}
       </span>
       <span className="inline-block w-[3px] ml-1 bg-secondary animate-pulse" style={{ animationDuration: '0.8s' }}>|</span>

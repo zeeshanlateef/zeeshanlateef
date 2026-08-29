@@ -1,0 +1,22 @@
+{
+  "short_name": "ZL Portfolio",
+  "name": "Zeeshan Lateef | Portfolio",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#05050a",
+  "theme_color": "#00d2ff",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}

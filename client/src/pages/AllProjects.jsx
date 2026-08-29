@@ -516,7 +516,7 @@ const AllProjects = () => {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4.5 py-2.5 text-xs font-semibold rounded-xl tracking-wide uppercase border transition-all duration-300 ${
                   selectedCategory === cat
-                    ? 'bg-gradient-to-r from-primary to-secondary text-black border-transparent shadow-[0_0_15px_rgba(0,210,255,0.2)]'
+                    ? 'bg-primary text-black border-transparent shadow-[0_0_15px_rgba(0,210,255,0.2)]'
                     : 'bg-white/5 border-white/5 text-gray-400 hover:text-white hover:border-white/10 hover:bg-white/10'
                 }`}
               >
@@ -559,36 +559,50 @@ const AllProjects = () => {
                   transition={{ duration: 0.4, delay: Math.min(idx * 0.05, 0.4) }}
                 >
                   <TiltCard className="flex flex-col h-full group">
-                    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-white/5 bg-neutral-900 flex items-center justify-center">
-                      {isImageFailed ? (
-                        <div className="w-full h-full bg-[#0d0d15] flex flex-col items-center justify-center p-6 text-center">
-                          <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-xl text-gradient-purple mb-2 shadow-md">
-                            {getInitials(project.title)}
+                    <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-white/5 bg-neutral-900">
+                      <a
+                        href={project.liveLink || project.githubLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full h-full flex items-center justify-center cursor-pointer"
+                      >
+                        {isImageFailed ? (
+                          <div className="w-full h-full bg-[#0d0d15] flex flex-col items-center justify-center p-6 text-center">
+                            <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-xl text-gradient-purple mb-2 shadow-md">
+                              {getInitials(project.title)}
+                            </div>
+                            <span className="text-gray-400 text-[10px] tracking-wider uppercase font-semibold text-center leading-snug px-2">
+                              {project.category}
+                            </span>
                           </div>
-                          <span className="text-gray-400 text-[10px] tracking-wider uppercase font-semibold text-center leading-snug px-2">
-                            {project.category}
-                          </span>
-                        </div>
-                      ) : (
-                        <img
-                          src={project.thumbnail}
-                          alt={project.title}
-                          onError={() => handleImageError(project.title)}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      )}
+                        ) : (
+                          <img
+                            src={project.thumbnail}
+                            alt={project.title}
+                            onError={() => handleImageError(project.title)}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        )}
+                      </a>
 
-                      <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-white/5 text-[11px] font-semibold text-gray-300">
+                      <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-white/5 text-[11px] font-semibold text-gray-300 pointer-events-none">
                         {project.category}
                       </div>
 
-                      <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                      <div
+                        onClick={(e) => {
+                          if (e.target.closest('.action-btn')) return;
+                          window.open(project.liveLink || project.githubLink, '_blank', 'noopener,noreferrer');
+                        }}
+                        className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 cursor-pointer"
+                      >
                         {project.githubLink && (
                           <a
                             href={project.githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-white/10 border border-white/15 hover:bg-primary hover:text-black rounded-full transition-all duration-300 text-white"
+                            onClick={(e) => e.stopPropagation()}
+                            className="action-btn p-3 bg-white/10 border border-white/15 hover:bg-primary hover:text-black rounded-full transition-all duration-300 text-white"
                           >
                             <GithubIcon className="w-5 h-5" />
                           </a>
@@ -598,7 +612,8 @@ const AllProjects = () => {
                             href={project.liveLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-white/10 border border-white/15 hover:bg-secondary hover:text-white rounded-full transition-all duration-300 text-white"
+                            onClick={(e) => e.stopPropagation()}
+                            className="action-btn p-3 bg-white/10 border border-white/15 hover:bg-secondary hover:text-white rounded-full transition-all duration-300 text-white"
                           >
                             <ExternalLink className="w-5 h-5" />
                           </a>
@@ -608,9 +623,16 @@ const AllProjects = () => {
 
                     <div className="p-6 flex flex-col justify-between flex-grow">
                       <div>
-                        <h3 className="text-lg font-display font-bold text-white mb-2.5 group-hover:text-primary transition-colors line-clamp-1">
-                          {project.title}
-                        </h3>
+                        <a
+                          href={project.liveLink || project.githubLink || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-block cursor-pointer"
+                        >
+                          <h3 className="text-lg font-display font-bold text-white mb-2.5 group-hover:text-primary transition-colors line-clamp-1">
+                            {project.title}
+                          </h3>
+                        </a>
                         <p className="text-gray-400 text-xs leading-relaxed mb-6 font-sans line-clamp-3">
                           {project.description}
                         </p>

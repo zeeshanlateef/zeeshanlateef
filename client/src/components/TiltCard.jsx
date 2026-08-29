@@ -24,12 +24,12 @@ const TiltCard = ({ children, className = '' }) => {
     const normalizedY = (y / rect.height) - 0.5;
 
     // Set maximum tilt angles (degrees)
-    const maxTilt = 12;
+    const maxTilt = 16;
     const rotateX = -normalizedY * maxTilt;
     const rotateY = normalizedX * maxTilt;
 
     // Apply 3D tilt transform (snappy, no scale lag)
-    setTransformStyle(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`);
+    setTransformStyle(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.06, 1.06, 1.06)`);
     
     // Update glow spot coordinates and visibility
     setGlowStyle({
@@ -53,20 +53,20 @@ const TiltCard = ({ children, className = '' }) => {
       onMouseLeave={handleMouseLeave}
       style={{
         transform: transformStyle,
+        transformStyle: 'preserve-3d',
         transition: isMoving 
           ? 'none' // Zero lag during active tracking
           : 'transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1)',
         willChange: 'transform',
       }}
-      className={`relative overflow-hidden glass-panel rounded-2xl border border-white/5 transition-all duration-300 hover:border-primary/25 hover:shadow-[0_12px_40px_rgba(0,210,255,0.12)] ${className}`}
+      className={`relative overflow-hidden glass-panel rounded-2xl border border-white/5 transition-all duration-300 hover:border-primary/70 hover:shadow-[0_0_12px_rgba(0,210,255,0.25)] ${className}`}
     >
       {/* Premium Multi-Layer Dynamic Shine Glow Overlay */}
       <div
-        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full blur-xl transition-opacity duration-300"
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[80px] transition-opacity duration-300"
         style={{
-          width: '320px',
-          height: '320px',
-          background: 'radial-gradient(circle, rgba(0,210,255,0.15) 0%, rgba(155,81,224,0.06) 50%, transparent 100%)',
+          width: '160px',
+          height: '160px',
           opacity: glowStyle.opacity,
           left: glowStyle.left,
           top: glowStyle.top,

@@ -86,7 +86,14 @@ const Hero = () => {
             variants={itemVariants}
             className="text-lg sm:text-2xl md:text-3xl font-display font-medium text-gray-300"
           >
-            I am a <Typewriter phrases={["Full Stack Software Developer", "Software Engineer", "React.js Specialist", "PHP/Laravel Developer"]} />
+            I am a <Typewriter phrases={[
+              "Computer Science Engineer",
+              "B.Tech from CSE",
+              "Software Developer",
+              "Full Stack Developer",
+              "MERN Developer",
+              "Php/Laravel Developer"
+            ]} />
           </motion.div>
 
           {/* Short Bio Tagline */}
@@ -105,7 +112,7 @@ const Hero = () => {
             <a
               href="#projects"
               onClick={(e) => scrollToSection(e, '#projects')}
-              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-primary to-secondary text-black font-semibold rounded-full hover:shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
+              className="w-full sm:w-auto px-8 py-4 bg-primary text-black font-semibold rounded-full hover:shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
               View Projects
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -163,15 +170,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Down Arrow Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-70">
-        <span className="text-[10px] uppercase tracking-widest text-gray-500 mb-2">Scroll Down</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-1.5 h-6 rounded-full bg-gradient-to-b from-primary to-secondary"
-        />
-      </div>
+
     </section>
   );
 };

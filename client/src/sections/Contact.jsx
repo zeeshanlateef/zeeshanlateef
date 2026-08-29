@@ -61,7 +61,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-[#08080f]">
+    <section id="contact" className="py-16 relative overflow-hidden bg-[#08080f]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Section Heading */}
         <div className="text-center mb-16">

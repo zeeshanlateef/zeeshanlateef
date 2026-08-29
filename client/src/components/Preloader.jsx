@@ -127,7 +127,7 @@ const Preloader = ({ finishLoading }) => {
             animate="visible"
             className="text-[9px] sm:text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold"
           >
-            Full Stack Software Developer / Software Engineer
+            Computer Science Engineer / Software Developer
           </motion.p>
         </div>
 
@@ -146,7 +146,7 @@ const Preloader = ({ finishLoading }) => {
               repeat: 0,
               ease: "easeInOut"
             }}
-            className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-primary to-secondary"
+            className="absolute top-0 bottom-0 w-1/2 bg-primary"
           />
         </motion.div>
       </div>
