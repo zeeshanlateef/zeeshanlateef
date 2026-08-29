@@ -44,6 +44,15 @@ const Hero = () => {
     }
   };
 
+  const handleResumeClick = () => {
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.href = "/assets/resume-zeeshanlateef.pdf";
+    downloadAnchor.setAttribute('download', 'resume-zeeshanlateef.pdf');
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    document.body.removeChild(downloadAnchor);
+  };
+
   return (
     <section
       id="home"
@@ -127,9 +136,10 @@ const Hero = () => {
             </a>
 
             <a
-              href="https://drive.google.com/file/d/1yZ8CXRFflC5JA8XKPOJvwh33MiG6QuhG/view?usp=sharing"
+              href="/assets/resume-zeeshanlateef.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleResumeClick}
               className="w-full sm:w-auto px-8 py-4 border border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5 font-semibold rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <FileText className="w-4 h-4" />

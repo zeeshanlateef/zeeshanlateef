@@ -73,7 +73,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Nav Links */}
-        <nav className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 font-medium font-sans">
+        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2.5 sm:gap-6 text-sm text-gray-400 font-medium font-sans">
           <a href="#home" onClick={handleScrollToTop} className="hover:text-white transition-colors">Home</a>
           <a href="#about" onClick={(e) => handleScrollTo(e, '#about')} className="hover:text-white transition-colors">About</a>
           <a href="#skills" onClick={(e) => handleScrollTo(e, '#skills')} className="hover:text-white transition-colors">Skills</a>
@@ -82,43 +82,40 @@ const Footer = () => {
           <a href="#contact" onClick={(e) => handleScrollTo(e, '#contact')} className="hover:text-white transition-colors">Contact</a>
         </nav>
 
-        {/* Right Column: Socials and Scroll To Top */}
-        <div className="flex flex-col sm:flex-row items-center gap-6">
-          {/* Animated Hover Social Icons */}
-          <div className="flex items-center gap-3">
-            <AnimatedSocial
-              href="https://github.com/zeeshanlateef"
-              icon={GithubIcon}
-              label="GitHub"
-              colorClass="hover:border-white/30 hover:text-white hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]"
-            />
-            <AnimatedSocial
-              href="https://linkedin.com/in/zeeshanlateef"
-              icon={LinkedinIcon}
-              label="LinkedIn"
-              colorClass="hover:border-blue-400/30 hover:text-blue-400 hover:bg-blue-400/5 hover:shadow-[0_0_15px_rgba(96,165,250,0.15)]"
-            />
-            <AnimatedSocial
-              href="https://wa.me/919572306596"
-              icon={WhatsappIcon}
-              label="WhatsApp"
-              colorClass="hover:border-emerald-400/30 hover:text-emerald-400 hover:bg-emerald-400/5 hover:shadow-[0_0_15px_rgba(52,211,153,0.15)]"
-            />
-            <AnimatedSocial
-              href="mailto:zeeshanlateef2016@gmail.com"
-              icon={MailIcon}
-              label="Email"
-              colorClass="hover:border-purple-400/30 hover:text-purple-400 hover:bg-purple-400/5 hover:shadow-[0_0_15px_rgba(192,132,252,0.15)]"
-            />
-          </div>
+        {/* Right Column: Socials and Scroll To Top inline */}
+        <div className="flex items-center gap-3">
+          <AnimatedSocial
+            href="https://github.com/zeeshanlateef"
+            icon={GithubIcon}
+            label="GitHub"
+            colorClass="hover:border-white/30 hover:text-white hover:bg-white/5 hover:shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+          />
+          <AnimatedSocial
+            href="https://linkedin.com/in/zeeshanlateef"
+            icon={LinkedinIcon}
+            label="LinkedIn"
+            colorClass="hover:border-blue-400/30 hover:text-blue-400 hover:bg-blue-400/5 hover:shadow-[0_0_15px_rgba(96,165,250,0.15)]"
+          />
+          <AnimatedSocial
+            href="https://wa.me/919572306596"
+            icon={WhatsappIcon}
+            label="WhatsApp"
+            colorClass="hover:border-emerald-400/30 hover:text-emerald-400 hover:bg-emerald-400/5 hover:shadow-[0_0_15px_rgba(52,211,153,0.15)]"
+          />
+          <AnimatedSocial
+            href="mailto:zeeshanlateef2016@gmail.com"
+            icon={MailIcon}
+            label="Email"
+            colorClass="hover:border-purple-400/30 hover:text-purple-400 hover:bg-purple-400/5 hover:shadow-[0_0_15px_rgba(192,132,252,0.15)]"
+          />
 
-          {/* Scroll To Top Button */}
+          {/* Scroll To Top Button inline with icons */}
           <button
             onClick={handleScrollToTop}
-            className="p-3 bg-white/5 border border-white/5 hover:border-primary/20 text-gray-400 hover:text-primary rounded-xl transition-all duration-300 hover:-translate-y-1"
+            className="flex items-center justify-center h-12 w-12 bg-white/5 border border-white/5 hover:border-primary/20 text-gray-400 hover:text-primary rounded-full transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,210,255,0.15)] hover:-translate-y-1 cursor-pointer shrink-0"
             title="Scroll To Top"
           >
-            <ArrowUp className="w-4 h-4" />
+            <ArrowUp className="w-5 h-5" />
           </button>
         </div>
       </div>
