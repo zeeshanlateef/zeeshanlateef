@@ -5,7 +5,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
   { name: 'Experience', href: '#experience' },
@@ -18,7 +17,7 @@ const resumeUrl = "/assets/resume-zeeshanlateef.pdf";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -74,6 +73,7 @@ const Navbar = () => {
       if (location.pathname === '/') {
         const sections = navLinks.map(link => document.querySelector(link.href));
         const scrollPosition = window.scrollY + 120;
+        let currentSection = '';
 
         for (let i = 0; i < sections.length; i++) {
           const section = sections[i];
@@ -81,11 +81,12 @@ const Navbar = () => {
             const top = section.offsetTop;
             const height = section.offsetHeight;
             if (scrollPosition >= top && scrollPosition < top + height) {
-              setActiveSection(navLinks[i].href.slice(1));
+              currentSection = navLinks[i].href.slice(1);
               break;
             }
           }
         }
+        setActiveSection(currentSection);
       } else {
         setActiveSection('');
       }
@@ -121,7 +122,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleScrollTo(e, link.href)}
-                className={`text-sm font-medium transition-colors relative py-1 ${
+                className={`text-base font-medium transition-colors relative py-1 ${
                   activeSection === link.href.slice(1)
                     ? 'text-white'
                     : 'text-gray-400 hover:text-white'
@@ -146,7 +147,7 @@ const Navbar = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleResumeClick}
-              className="px-4 py-2 text-xs font-semibold tracking-wide uppercase border border-white/10 rounded-full hover:border-primary/50 hover:text-primary transition-all duration-300 flex items-center gap-1"
+              className="px-4 py-2 text-sm font-semibold tracking-wide uppercase border border-white/10 rounded-full hover:border-primary/50 hover:text-primary transition-all duration-300 flex items-center gap-1"
             >
               Resume
               <ArrowUpRight className="w-3.5 h-3.5" />

@@ -72,7 +72,7 @@ const Preloader = ({ finishLoading }) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="fixed inset-0 w-full h-full bg-[#05050a] z-50 flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 w-full h-full animated-bg z-50 flex flex-col items-center justify-center overflow-hidden"
     >
       {/* Background Noise overlay */}
       <div className="noise-bg" />

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Layout, Server, Database, Wrench, Languages, Code2 } from 'lucide-react';
 import TiltCard from '../components/TiltCard';
+import ParticleBackground from '../components/ParticleBackground';
 
 const skillCategories = [
   {
@@ -55,7 +56,9 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-16 relative overflow-hidden bg-[#05050a] border-b border-white/5">
+    <section id="skills" className="py-16 relative overflow-hidden animated-bg border-b border-white/5">
+      {/* 3D Canvas Particle Background */}
+      <ParticleBackground />
 
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">

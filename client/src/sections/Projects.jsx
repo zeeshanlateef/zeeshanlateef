@@ -4,6 +4,7 @@ import { ExternalLink, Layers, Code, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
 import { GithubIcon } from '../components/SocialIcons';
+import ParticleBackground from '../components/ParticleBackground';
 
 // Featured homepage fallback projects (9) with Unsplash topic images
 const fallbackProjects = [
@@ -150,7 +151,9 @@ const Projects = () => {
   const displayProjects = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 9);
 
   return (
-    <section id="projects" className="py-16 relative overflow-hidden bg-[#05050a] border-b border-white/5">
+    <section id="projects" className="py-16 relative overflow-hidden animated-bg border-b border-white/5">
+      {/* 3D Canvas Particle Background */}
+      <ParticleBackground />
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Section Heading */}
         <div className="text-center mb-16">

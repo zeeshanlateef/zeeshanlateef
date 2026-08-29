@@ -73,8 +73,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Nav Links */}
-        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2.5 sm:gap-6 text-sm text-gray-400 font-medium font-sans">
-          <a href="#home" onClick={handleScrollToTop} className="hover:text-white transition-colors">Home</a>
+        <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2.5 sm:gap-6 text-base text-gray-400 font-medium font-sans">
           <a href="#about" onClick={(e) => handleScrollTo(e, '#about')} className="hover:text-white transition-colors">About</a>
           <a href="#skills" onClick={(e) => handleScrollTo(e, '#skills')} className="hover:text-white transition-colors">Skills</a>
           <a href="#experience" onClick={(e) => handleScrollTo(e, '#experience')} className="hover:text-white transition-colors">Experience</a>

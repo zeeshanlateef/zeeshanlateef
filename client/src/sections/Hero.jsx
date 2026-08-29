@@ -56,7 +56,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+      className="relative min-h-[85vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden animated-bg"
     >
       {/* 3D Canvas Particle Background */}
       <ParticleBackground />
@@ -64,12 +64,12 @@ const Hero = () => {
 
 
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-16 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-8 sm:py-16 text-center">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col items-center space-y-8"
+          className="flex flex-col items-center space-y-6 sm:space-y-8"
         >
           {/* Welcome Tag */}
           <motion.div
@@ -116,35 +116,37 @@ const Hero = () => {
           {/* Call to Actions (CTAs) */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md sm:max-w-none px-4 sm:px-0"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-none px-4 sm:px-0"
           >
             <a
               href="#projects"
               onClick={(e) => scrollToSection(e, '#projects')}
-              className="w-full sm:w-auto px-8 py-4 bg-primary text-black font-semibold rounded-full hover:shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
+              className="w-full sm:w-auto px-8 py-3.5 bg-primary text-black font-semibold rounded-full hover:shadow-[0_0_30px_rgba(0,210,255,0.4)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
               View Projects
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
 
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, '#contact')}
-              className="w-full sm:w-auto px-8 py-4 border border-white/10 text-white hover:border-white/20 hover:bg-white/5 font-semibold rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              Contact Me
-            </a>
+            <div className="flex flex-row items-center justify-center gap-3 w-full sm:w-auto">
+              <a
+                href="#contact"
+                onClick={(e) => scrollToSection(e, '#contact')}
+                className="flex-1 sm:flex-initial sm:w-auto px-4 sm:px-8 py-3.5 border border-white/10 text-white hover:border-white/20 hover:bg-white/5 text-sm sm:text-base font-semibold rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-1.5"
+              >
+                Contact Me
+              </a>
 
-            <a
-              href="/assets/resume-zeeshanlateef.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={handleResumeClick}
-              className="w-full sm:w-auto px-8 py-4 border border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5 font-semibold rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <FileText className="w-4 h-4" />
-              Resume
-            </a>
+              <a
+                href="/assets/resume-zeeshanlateef.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleResumeClick}
+                className="flex-1 sm:flex-initial sm:w-auto px-4 sm:px-8 py-3.5 border border-primary/20 text-primary hover:border-primary/40 hover:bg-primary/5 text-sm sm:text-base font-semibold rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-1.5"
+              >
+                <FileText className="w-4 h-4 shrink-0" />
+                Resume
+              </a>
+            </div>
           </motion.div>
 
           {/* Animated Hover Social Links */}

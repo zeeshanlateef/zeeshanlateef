@@ -61,6 +61,18 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
 }
 
+@keyframes gradient-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-bg {
+  background: linear-gradient(-45deg, #05050a, #0a0e1a, #05050a, #12071f);
+  background-size: 400% 400%;
+  animation: gradient-bg 15s ease infinite;
+}
+
 /* Background noise overlay */
 .noise-bg {
   position: fixed;
