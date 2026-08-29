@@ -13,7 +13,7 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
-const resumeUrl = "https://drive.google.com/file/d/1yZ8CXRFflC5JA8XKPOJvwh33MiG6QuhG/view?usp=sharing";
+const resumeUrl = "/assets/resume.pdf";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,15 +23,12 @@ const Navbar = () => {
   const location = useLocation();
 
   const handleResumeClick = () => {
-    const downloadUrl = "https://drive.google.com/uc?export=download&id=1yZ8CXRFflC5JA8XKPOJvwh33MiG6QuhG";
-    let iframe = document.getElementById('resume-download-iframe');
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.id = 'resume-download-iframe';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-    }
-    iframe.src = downloadUrl;
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.href = resumeUrl;
+    downloadAnchor.setAttribute('download', 'resume-zeeshanlateef.pdf');
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    document.body.removeChild(downloadAnchor);
   };
 
   // Smooth scroll handler with route check
