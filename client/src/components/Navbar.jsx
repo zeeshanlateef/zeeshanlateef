@@ -13,7 +13,7 @@ const navLinks = [
   { name: 'Contact', href: '#contact' },
 ];
 
-const resumeUrl = "/assets/resume.pdf";
+const resumeUrl = "/assets/resume-zeeshanlateef.pdf";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
