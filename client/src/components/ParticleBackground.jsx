@@ -12,10 +12,10 @@ const ParticleBackground = () => {
 
     let animationFrameId;
     let particles = [];
-    let mouse = { x: null, y: null, radius: 150 };
+    let mouse = { x: null, y: null, radius: 160 };
 
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isLightMode = () => document.documentElement.classList.contains('light');
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -27,19 +27,23 @@ const ParticleBackground = () => {
       constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 2 + 1;
-        // Slower velocities for a smoother, premium floating feel
-        this.baseSpeedX = (Math.random() - 0.5) * 0.4;
-        this.baseSpeedY = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 2.2 + 1.2;
+        this.baseSpeedX = (Math.random() - 0.5) * 0.45;
+        this.baseSpeedY = (Math.random() - 0.5) * 0.45;
         this.speedX = this.baseSpeedX;
         this.speedY = this.baseSpeedY;
-        this.color = Math.random() > 0.5 ? 'rgba(0, 210, 255, 0.4)' : 'rgba(155, 81, 224, 0.4)';
+      }
+
+      getColor() {
+        if (isLightMode()) {
+          return Math.random() > 0.5 ? 'rgba(2, 132, 199, 0.55)' : 'rgba(124, 58, 237, 0.55)';
+        }
+        return Math.random() > 0.5 ? 'rgba(0, 210, 255, 0.5)' : 'rgba(155, 81, 224, 0.5)';
       }
 
       update() {
         if (prefersReducedMotion) return;
 
-        // Mouse interaction (gentle attraction / parallax shift)
         if (mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - this.x;
           const dy = mouse.y - this.y;
@@ -47,21 +51,17 @@ const ParticleBackground = () => {
 
           if (distance < mouse.radius) {
             const force = (mouse.radius - distance) / mouse.radius;
-            // Gently nudge particles away/towards mouse
-            this.x -= dx * force * 0.02;
-            this.y -= dy * force * 0.02;
+            this.x -= dx * force * 0.025;
+            this.y -= dy * force * 0.025;
           } else {
-            // Return to natural drifting speed
             this.x += (this.baseSpeedX - this.speedX) * 0.05;
             this.y += (this.baseSpeedY - this.speedY) * 0.05;
           }
         }
 
-        // Drifting motion
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Bounce off walls
         if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
         if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
@@ -69,16 +69,16 @@ const ParticleBackground = () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = this.getColor();
         ctx.fill();
       }
     }
 
     const initParticles = () => {
       particles = [];
-      // Adjust particle count based on screen width
       const isMobile = window.innerWidth < 768;
-      const count = isMobile ? 30 : 90;
+      // Increased particle count for a rich, high-density constellation
+      const count = isMobile ? 60 : 140;
 
       for (let i = 0; i < count; i++) {
         const x = Math.random() * canvas.width;
@@ -89,7 +89,8 @@ const ParticleBackground = () => {
 
     const drawLines = () => {
       const isMobile = window.innerWidth < 768;
-      const maxDistance = isMobile ? 80 : 120;
+      const maxDistance = isMobile ? 90 : 130;
+      const light = isLightMode();
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -98,15 +99,15 @@ const ParticleBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < maxDistance) {
-            // Draw connecting line with opacity proportional to proximity
-            const alpha = (1 - distance / maxDistance) * 0.15;
+            const alpha = (1 - distance / maxDistance) * (light ? 0.22 : 0.18);
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             
-            // Solid stroke connecting lines for a cinematic aesthetic
-            ctx.strokeStyle = `rgba(0, 210, 255, ${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = light 
+              ? `rgba(2, 132, 199, ${alpha})` 
+              : `rgba(0, 210, 255, ${alpha})`;
+            ctx.lineWidth = 0.9;
             ctx.stroke();
           }
         }
@@ -125,7 +126,6 @@ const ParticleBackground = () => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // Event listeners
     window.addEventListener('resize', resizeCanvas);
     
     const handleMouseMove = (e) => {
@@ -141,11 +141,9 @@ const ParticleBackground = () => {
     window.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseleave', handleMouseLeave);
 
-    // Run setup
     resizeCanvas();
     animate();
 
-    // Clean up
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
@@ -158,7 +156,6 @@ const ParticleBackground = () => {
     <canvas
       ref={canvasRef}
       className="absolute top-0 left-0 w-full h-full pointer-events-none z-0"
-      style={{ mixBlendMode: 'screen' }}
     />
   );
 };

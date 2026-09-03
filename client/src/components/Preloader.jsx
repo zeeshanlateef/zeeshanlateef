@@ -22,7 +22,7 @@ const Preloader = ({ finishLoading }) => {
       opacity: 0,
       transition: {
         duration: 0.9,
-        ease: [0.76, 0, 0.24, 1], // premium custom cubic-bezier (exact CSS easeInOutQuint)
+        ease: [0.76, 0, 0.24, 1], // custom cubic-bezier easeInOutQuint
       }
     }
   };
@@ -43,7 +43,7 @@ const Preloader = ({ finishLoading }) => {
         type: 'spring',
         damping: 12,
         stiffness: 100,
-        delay: i * 0.08, // Stagger letter by letter
+        delay: i * 0.08,
       }
     })
   };
@@ -76,8 +76,6 @@ const Preloader = ({ finishLoading }) => {
     >
       {/* Background Noise overlay */}
       <div className="noise-bg" />
-
-
 
       <div className="text-center relative z-10 flex flex-col items-center select-none">
         
@@ -119,15 +117,15 @@ const Preloader = ({ finishLoading }) => {
           </motion.span>
         </div>
 
-        {/* Short, professional status text */}
+        {/* Professional role text: Full Stack Developer | Software Developer */}
         <div className="overflow-hidden h-6 flex items-center justify-center mb-6">
           <motion.p
             variants={subtitleVariants}
             initial="hidden"
             animate="visible"
-            className="text-[9px] sm:text-xs uppercase tracking-[0.2em] text-gray-500 font-semibold"
+            className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-gray-400 font-semibold"
           >
-            Computer Science Engineer / Software Developer
+            Full Stack Developer | Software Developer
           </motion.p>
         </div>
 

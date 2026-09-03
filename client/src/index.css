@@ -14,9 +14,36 @@
   --color-dark-border: rgba(255, 255, 255, 0.05);
 }
 
+:root {
+  --bg-main: #05050a;
+  --bg-secondary: #08080f;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --glass-bg: rgba(13, 13, 20, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-nav: rgba(5, 5, 10, 0.85);
+  --primary-color: #00d2ff;
+  --secondary-color: #9b51e0;
+}
+
+/* ==========================================
+   LIGHT THEME DESIGN SYSTEM (Solid Colors)
+   ========================================== */
+html.light {
+  --bg-main: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(203, 213, 225, 0.9);
+  --glass-nav: rgba(255, 255, 255, 0.95);
+  --primary-color: #0284c7;
+  --secondary-color: #7c3aed;
+}
+
 html, body {
-  background-color: var(--color-dark-bg);
-  color: #f3f4f6;
+  background-color: var(--bg-main);
+  color: var(--text-main);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -24,6 +51,7 @@ html, body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* Typography Optimization */
@@ -39,38 +67,82 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom styles for Glassmorphism */
 .glass-panel {
-  background: rgba(13, 13, 20, 0.45);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+html.light .glass-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+html.light .glass-panel:hover {
+  border-color: #0284c7;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.12);
 }
 
 .glass-nav {
-  background: rgba(5, 5, 10, 0.7);
+  background: var(--glass-nav);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
-/* Glowing background animations */
-.glow-spot {
-  filter: blur(100px);
-  opacity: 0.15;
-  pointer-events: none;
-  border-radius: 50%;
-  position: absolute;
+html.light .glass-nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
 }
 
-@keyframes gradient-bg {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Primary Button Custom styling (Solid Colors, NO Gradients) */
+.btn-primary-custom {
+  background-color: var(--color-primary);
+  color: #000000;
+  font-weight: 700;
+  transition: all 0.25s ease;
 }
 
+html.light .btn-primary-custom {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+html.light .btn-primary-custom * {
+  color: #ffffff !important;
+}
+
+/* Solid Title Colors (NO Gradients) */
+.title-gradient {
+  color: var(--primary-color) !important;
+  font-weight: 800;
+  display: inline-block;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+html.light .title-gradient {
+  color: #0284c7 !important;
+  font-weight: 800;
+  display: inline-block;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Backgrounds (Solid Colors, NO Gradients) */
 .animated-bg {
-  background: linear-gradient(-45deg, #05050a, #0a0e1a, #05050a, #12071f);
-  background-size: 400% 400%;
-  animation: gradient-bg 15s ease infinite;
+  background-color: #05050a;
+}
+
+html.light .animated-bg {
+  background-color: #ffffff;
 }
 
 /* Background noise overlay */
@@ -87,32 +159,156 @@ h1, h2, h3, h4, h5, h6 {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
+/* ==========================================
+   LIGHT THEME SECTIONS & VISIBILITY FIXES
+   ========================================== */
+html.light .text-white {
+  color: #0f172a !important;
+}
+
+html.light .text-gray-100 {
+  color: #0f172a !important;
+}
+
+html.light .text-gray-200,
+html.light .text-gray-300 {
+  color: #334155 !important;
+}
+
+html.light .text-gray-400 {
+  color: #475569 !important;
+}
+
+html.light .text-gray-500,
+html.light .text-gray-600 {
+  color: #64748b !important;
+}
+
+/* Navbar Resume Button Fix in Light Mode */
+html.light nav a.resume-btn,
+html.light header a.resume-btn {
+  background-color: #0284c7 !important;
+  color: #ffffff !important;
+  border-color: #0284c7 !important;
+}
+html.light nav a.resume-btn *,
+html.light header a.resume-btn * {
+  color: #ffffff !important;
+}
+
+/* Category & Badge Overlays in Light Mode (Fixes Image 1 & Image 2) */
+html.light .category-badge {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #334155 !important;
+}
+html.light .category-badge * {
+  color: #ffffff !important;
+}
+
+html.light .tech-badge {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Alternating Solid Section Backgrounds for Light Mode */
+html.light section#home {
+  background-color: #ffffff !important;
+}
+
+html.light section#about {
+  background-color: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.light section#skills {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.light section#experience {
+  background-color: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.light section#projects {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+html.light section#contact {
+  background-color: #f8fafc !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+}
+
+/* Solid Light Theme Footer */
+html.light footer {
+  background-color: #0f172a !important;
+  border-top: 1px solid #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.light footer * {
+  color: #cbd5e1;
+}
+
+html.light footer .font-display span,
+html.light footer a:hover,
+html.light footer button {
+  color: #00d2ff !important;
+}
+
+html.light footer button {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+html.light .bg-\[\#08080f\] {
+  background-color: #f8fafc !important;
+}
+
+html.light .bg-\[\#05050a\] {
+  background-color: #ffffff !important;
+}
+
+html.light .bg-dark-bg {
+  background-color: #ffffff !important;
+}
+
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/15,
+html.light .border-white\/20 {
+  border-color: #e2e8f0 !important;
+}
+
 /* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #05050a;
+  background: var(--bg-main);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(150, 150, 150, 0.3);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
-.title-gradient {
-  color: var(--color-primary);
+  background: var(--primary-color);
 }
 
 .text-gradient-purple {
+  color: #9333ea;
+}
+
+html.dark .text-gradient-purple {
   color: #a78bfa;
 }
 
 /* Magnetic Hover helper */
 .magnetic-hover {
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .magnetic-hover:hover {
   transform: scale(1.05);

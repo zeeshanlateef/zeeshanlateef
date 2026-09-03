@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, Heart, GraduationCap } from 'lucide-react';
+import { MapPin, Calendar, Heart, GraduationCap, ArrowRight, UserCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
 
 const About = () => {
@@ -26,8 +27,6 @@ const About = () => {
 
   return (
     <section id="about" className="py-16 relative overflow-hidden bg-[#08080f] border-b border-white/5">
-
-
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Section Heading */}
@@ -50,10 +49,10 @@ const About = () => {
           />
         </div>
 
-        {/* 2-Column Grid (Stretched for Equal Height) */}
+        {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           
-          {/* Profile Card Column (5 cols) */}
+          {/* Profile Card Column */}
           <motion.div
             variants={profileVariants}
             initial="hidden"
@@ -79,7 +78,9 @@ const About = () => {
               </div>
 
               <h3 className="text-2xl font-display font-bold text-white mb-1">Zeeshan Lateef</h3>
-              <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-4">B.Tech | Full Stack Developer</p>
+              <p className="text-primary text-xs font-semibold uppercase tracking-wider mb-4">
+                Full Stack Developer | Software Developer
+              </p>
               
               <div className="w-full border-t border-white/5 my-4 pt-4 flex flex-col space-y-3 text-left px-2">
                 <div className="flex items-center text-gray-400 text-sm gap-3">
@@ -91,14 +92,18 @@ const About = () => {
                   <span>2+ Years Experience</span>
                 </div>
                 <div className="flex items-center text-gray-400 text-sm gap-3">
+                  <UserCheck className="w-4 h-4 text-primary shrink-0" />
+                  <span>Vibe Coding & Clean Code Focus</span>
+                </div>
+                <div className="flex items-center text-gray-400 text-sm gap-3">
                   <Heart className="w-4 h-4 text-primary shrink-0" />
-                  <span>Passionate about Clean Code</span>
+                  <span>Passionate Problem Solver</span>
                 </div>
               </div>
             </TiltCard>
           </motion.div>
 
-          {/* Description & Education Column (7 cols) */}
+          {/* Description & Education Column */}
           <div className="lg:col-span-7 flex flex-col justify-between space-y-8">
             {/* Bio Details */}
             <motion.div
@@ -110,11 +115,22 @@ const About = () => {
             >
               <h3 className="text-2xl font-display font-bold text-white mb-4">Professional Overview</h3>
               <p className="text-gray-400 leading-relaxed font-sans mb-4">
-                I am a Full Stack Developer with 2+ years of experience building scalable, high-performance web applications. My expertise spans across modern frontend technologies like React.js and robust backend frameworks including PHP (Laravel), Node.js (Express), and FastAPI (Python).
+                I am a Full Stack Developer with 2+ years of hands-on experience crafting robust web applications. My tech stack includes PHP (Laravel), React.js, Node.js (Express), and MySQL database architectures alongside modern Vibe Coding workflows to deliver high quality code efficiently.
               </p>
-              <p className="text-gray-400 leading-relaxed font-sans">
-                Throughout my career, I've developed REST APIs, dynamic CRM portals, and e-commerce systems with focus on security, speed, and responsive, user-friendly layouts. I am passionate about writing clean, maintainable, and well-structured code that solves real-world challenges.
+              <p className="text-gray-400 leading-relaxed font-sans mb-6">
+                From developing dynamic client management systems to custom e-commerce portals and responsive React frontends, I focus on clean architecture, performance optimization, and seamless user experiences.
               </p>
+
+              {/* Read More About Me Button */}
+              <div>
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 bg-primary text-black font-semibold text-sm sm:text-base rounded-full hover:shadow-[0_0_25px_rgba(0,210,255,0.4)] hover:scale-105 transition-all duration-300 group cursor-pointer"
+                >
+                  Read More About Me
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </motion.div>
 
             {/* Education Card */}

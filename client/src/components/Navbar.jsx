@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
+import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
-  { name: 'About', href: '#about' },
+  { name: 'About', path: '/about' },
   { name: 'Skills', href: '#skills' },
   { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'Projects', path: '/projects' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -30,16 +32,30 @@ const Navbar = () => {
     document.body.removeChild(downloadAnchor);
   };
 
-  // Smooth scroll handler with route check
-  const handleScrollTo = (e, href) => {
+  const handleNavClick = (e, link) => {
     e.preventDefault();
     setIsOpen(false);
 
-    if (location.pathname !== '/') {
-      // Redirect to home page first, then scroll
-      navigate('/');
-      setTimeout(() => {
-        const target = document.querySelector(href);
+    if (link.path) {
+      navigate(link.path);
+      window.scrollTo(0, 0);
+    } else {
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const target = document.querySelector(link.href);
+          if (target) {
+            const offset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 150);
+      } else {
+        const target = document.querySelector(link.href);
         if (target) {
           const offset = 80;
           const elementPosition = target.getBoundingClientRect().top;
@@ -49,18 +65,6 @@ const Navbar = () => {
             behavior: 'smooth'
           });
         }
-      }, 150);
-    } else {
-      // On homepage, scroll directly
-      const target = document.querySelector(href);
-      if (target) {
-        const offset = 80;
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
       }
     }
   };
@@ -69,9 +73,8 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Simple scroll spy logic (only active on homepage)
       if (location.pathname === '/') {
-        const sections = navLinks.map(link => document.querySelector(link.href));
+        const sections = navLinks.filter(l => l.href).map(link => document.querySelector(link.href));
         const scrollPosition = window.scrollY + 120;
         let currentSection = '';
 
@@ -81,12 +84,16 @@ const Navbar = () => {
             const top = section.offsetTop;
             const height = section.offsetHeight;
             if (scrollPosition >= top && scrollPosition < top + height) {
-              currentSection = navLinks[i].href.slice(1);
+              currentSection = navLinks.filter(l => l.href)[i].href.slice(1);
               break;
             }
           }
         }
         setActiveSection(currentSection);
+      } else if (location.pathname === '/about') {
+        setActiveSection('about');
+      } else if (location.pathname === '/projects') {
+        setActiveSection('projects');
       } else {
         setActiveSection('');
       }
@@ -107,7 +114,15 @@ const Navbar = () => {
           {/* Logo / Brand Name */}
           <Link
             to="/"
-            onClick={(e) => handleScrollTo(e, '#home')}
+            onClick={(e) => {
+              e.preventDefault();
+              if (location.pathname !== '/') {
+                navigate('/');
+                window.scrollTo(0, 0);
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
             className="font-display text-lg sm:text-xl font-bold tracking-tight text-white hover:opacity-90 transition-opacity flex items-center gap-1.5"
           >
             <span className="text-primary">&lt;</span>
@@ -117,45 +132,76 @@ const Navbar = () => {
 
           {/* Desktop Nav Items */}
           <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleScrollTo(e, link.href)}
-                className={`text-base font-medium transition-colors relative py-1 ${
-                  activeSection === link.href.slice(1)
-                    ? 'text-white'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                {link.name}
-                {activeSection === link.href.slice(1) && (
-                  <motion.span
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 w-full h-[2px] bg-primary"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.path 
+                ? location.pathname === link.path 
+                : activeSection === link.href.slice(1);
+
+              return (
+                <a
+                  key={link.name}
+                  href={link.path || link.href}
+                  onClick={(e) => handleNavClick(e, link)}
+                  className={`text-base font-medium transition-colors relative py-1 ${
+                    isActive
+                      ? 'text-white font-semibold'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeIndicator"
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-primary"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
-          {/* Action Button & Social Links */}
+          {/* Action Buttons & Theme Toggle */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 rounded-full glass-panel border border-white/10 hover:border-primary/50 text-gray-300 hover:text-primary transition-all duration-300 flex items-center justify-center cursor-pointer"
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-indigo-600" />
+              )}
+            </button>
+
             <a
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleResumeClick}
-              className="px-4 py-2 text-sm font-semibold tracking-wide uppercase border border-white/10 rounded-full hover:border-primary/50 hover:text-primary transition-all duration-300 flex items-center gap-1"
+              className="resume-btn px-4 py-2 text-sm font-semibold tracking-wide uppercase border border-white/10 rounded-full hover:border-primary/50 hover:text-primary transition-all duration-300 flex items-center gap-1"
             >
               Resume
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
-          {/* Mobile Hamburguer Trigger */}
-          <div className="flex md:hidden">
+          {/* Mobile Hamburger & Theme Toggle Trigger */}
+          <div className="flex items-center space-x-3 md:hidden">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full glass-panel border border-white/10 text-gray-300 hover:text-primary transition-colors cursor-pointer"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-amber-400" />
+              ) : (
+                <Moon className="w-5 h-5 text-indigo-600" />
+              )}
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-400 hover:text-white transition-colors"
@@ -178,23 +224,26 @@ const Navbar = () => {
             className="fixed top-[68px] left-0 w-full h-[calc(100vh-68px)] bg-dark-bg/95 backdrop-blur-2xl z-30 flex flex-col justify-between p-8 border-t border-white/5 md:hidden"
           >
             <nav className="flex flex-col space-y-6 mt-8">
-              {navLinks.map((link, idx) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleScrollTo(e, link.href)}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className={`text-2xl font-display font-medium block ${
-                    activeSection === link.href.slice(1)
-                      ? 'text-primary'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = link.path 
+                  ? location.pathname === link.path 
+                  : activeSection === link.href.slice(1);
+
+                return (
+                  <a
+                    key={link.name}
+                    href={link.path || link.href}
+                    onClick={(e) => handleNavClick(e, link)}
+                    className={`text-2xl font-display font-medium block ${
+                      isActive
+                        ? 'text-primary font-bold'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
             </nav>
 
             <motion.div
@@ -208,9 +257,10 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleResumeClick}
-                className="w-full py-4 text-center text-sm font-semibold tracking-wide uppercase bg-primary text-black rounded-full hover:shadow-[0_0_20px_rgba(0,210,255,0.4)] transition-all duration-300"
+                className="resume-btn w-full py-4 text-center text-sm font-semibold tracking-wide uppercase bg-primary text-black rounded-full hover:shadow-[0_0_20px_rgba(0,210,255,0.4)] transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Open & Download Resume
+                <ArrowUpRight className="w-4 h-4" />
               </a>
 
               <div className="flex items-center justify-center space-x-6">

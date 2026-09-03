@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 const Typewriter = ({ 
-  phrases = ["Full Stack Developer", "React.js Specialist", "REST API Builder"], 
-  typingSpeed = 100, 
-  deletingSpeed = 50, 
-  delayBeforeDelete = 2000, 
-  delayBeforeType = 500 
+  phrases = ["Full Stack Developer", "PHP / Laravel Developer", "React Developer", "Vibe Coding Specialist"], 
+  typingSpeed = 90, 
+  deletingSpeed = 40, 
+  delayBeforeDelete = 2200, 
+  delayBeforeType = 400 
 }) => {
   const [currentText, setCurrentText] = useState('');
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -42,11 +42,13 @@ const Typewriter = ({
   }, [currentText, isDeleting, phraseIndex, phrases, typingSpeed, deletingSpeed, delayBeforeDelete, delayBeforeType]);
 
   return (
-    <span className="inline-block min-h-[1.5em]">
-      <span className="text-primary font-semibold font-display">
-        {currentText}
-      </span>
-      <span className="inline-block w-[3px] ml-1 bg-secondary animate-pulse" style={{ animationDuration: '0.8s' }}>|</span>
+    <span className="inline-flex items-center text-primary font-bold font-display tracking-tight">
+      <span>{currentText}</span>
+      <span 
+        className="inline-block w-[2.5px] h-[0.9em] ml-1 bg-primary rounded-full animate-pulse shrink-0" 
+        style={{ animationDuration: '0.8s' }}
+        aria-hidden="true"
+      />
     </span>
   );
 };

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Layers, Code, ArrowRight } from 'lucide-react';
+import { ExternalLink, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
 import { GithubIcon } from '../components/SocialIcons';
 import ParticleBackground from '../components/ParticleBackground';
 
-// Featured homepage fallback projects (9) with Unsplash topic images
+// Featured homepage fallback projects (9)
 const fallbackProjects = [
   {
     title: 'HRMS (Human Resource Management System)',
@@ -146,13 +146,11 @@ const Projects = () => {
     }
   };
 
-  // Filter projects to show only featured ones on homepage
   const featuredProjects = projects.filter(p => p.featured);
   const displayProjects = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 9);
 
   return (
-    <section id="projects" className="py-16 relative overflow-hidden animated-bg border-b border-white/5">
-      {/* 3D Canvas Particle Background */}
+    <section id="projects" className="py-16 relative overflow-hidden bg-[#05050a] border-b border-white/5">
       <ParticleBackground />
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Section Heading */}
@@ -175,7 +173,7 @@ const Projects = () => {
           />
         </div>
 
-        {/* Projects Grid - 3 Columns */}
+        {/* Projects Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -189,7 +187,7 @@ const Projects = () => {
             return (
               <motion.div key={idx} variants={cardVariants}>
                 <TiltCard className="flex flex-col h-full group">
-                  {/* Thumbnail / Image Container */}
+                  {/* Thumbnail Container */}
                   <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-white/5 bg-neutral-900">
                     <a
                       href={project.liveLink || project.githubLink || "#"}
@@ -198,9 +196,8 @@ const Projects = () => {
                       className="w-full h-full flex items-center justify-center cursor-pointer"
                     >
                       {isImageFailed ? (
-                        /* High Quality Solid Placeholder */
                         <div className="w-full h-full bg-[#0d0d15] flex flex-col items-center justify-center p-6 text-center">
-                          <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-xl text-gradient-purple mb-2 shadow-md">
+                          <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-display font-bold text-xl text-primary mb-2 shadow-md">
                             {getInitials(project.title)}
                           </div>
                           <span className="text-gray-400 text-[10px] tracking-wider uppercase font-semibold">
@@ -217,8 +214,8 @@ const Projects = () => {
                       )}
                     </a>
 
-                    {/* Category Label Overlay */}
-                    <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-white/5 text-[11px] font-semibold text-gray-300 pointer-events-none">
+                    {/* Category Badge Overlay (High Contrast & Visible) */}
+                    <div className="category-badge absolute top-4 left-4 bg-slate-900/90 text-white px-3.5 py-1.5 rounded-lg border border-slate-700 text-[11px] font-bold tracking-wide pointer-events-none shadow-lg">
                       {project.category || 'Featured'}
                     </div>
 
@@ -228,7 +225,7 @@ const Projects = () => {
                         if (e.target.closest('.action-btn')) return;
                         window.open(project.liveLink || project.githubLink, '_blank', 'noopener,noreferrer');
                       }}
-                      className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 cursor-pointer"
+                      className="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 cursor-pointer"
                     >
                       {project.githubLink && (
                         <a
@@ -281,7 +278,7 @@ const Projects = () => {
                         {project.techStack.map((tech, tIdx) => (
                           <span
                             key={tIdx}
-                            className="px-2 py-0.5 bg-white/5 border border-white/5 rounded text-[9px] font-semibold tracking-wide uppercase text-gray-400"
+                            className="tech-badge px-2.5 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-semibold tracking-wide uppercase text-gray-300"
                           >
                             {tech}
                           </span>
