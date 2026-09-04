@@ -7,10 +7,10 @@ import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
   { name: 'About', path: '/about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Experience', href: '#experience' },
+  { name: 'Skills', href: '/#skills' },
+  { name: 'Experience', href: '/#experience' },
   { name: 'Projects', path: '/projects' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contact', href: '/#contact' },
 ];
 
 const resumeUrl = "/assets/resume-zeeshanlateef.pdf";
@@ -33,6 +33,10 @@ const Navbar = () => {
   };
 
   const handleNavClick = (e, link) => {
+    // Allow native browser behavior for new tab (Ctrl, Cmd, Shift, or middle click)
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) {
+      return;
+    }
     e.preventDefault();
     setIsOpen(false);
 
@@ -40,10 +44,11 @@ const Navbar = () => {
       navigate(link.path);
       window.scrollTo(0, 0);
     } else {
+      const targetId = link.href.includes('#') ? `#${link.href.split('#')[1]}` : link.href;
       if (location.pathname !== '/') {
         navigate('/');
         setTimeout(() => {
-          const target = document.querySelector(link.href);
+          const target = document.querySelector(targetId);
           if (target) {
             const offset = 80;
             const elementPosition = target.getBoundingClientRect().top;
@@ -55,7 +60,7 @@ const Navbar = () => {
           }
         }, 150);
       } else {
-        const target = document.querySelector(link.href);
+        const target = document.querySelector(targetId);
         if (target) {
           const offset = 80;
           const elementPosition = target.getBoundingClientRect().top;
@@ -74,7 +79,10 @@ const Navbar = () => {
       setScrolled(window.scrollY > 20);
 
       if (location.pathname === '/') {
-        const sections = navLinks.filter(l => l.href).map(link => document.querySelector(link.href));
+        const sections = navLinks.filter(l => l.href).map(link => {
+          const targetId = link.href.includes('#') ? `#${link.href.split('#')[1]}` : link.href;
+          return document.querySelector(targetId);
+        });
         const scrollPosition = window.scrollY + 120;
         let currentSection = '';
 
@@ -84,7 +92,8 @@ const Navbar = () => {
             const top = section.offsetTop;
             const height = section.offsetHeight;
             if (scrollPosition >= top && scrollPosition < top + height) {
-              currentSection = navLinks.filter(l => l.href)[i].href.slice(1);
+              const href = navLinks.filter(l => l.href)[i].href;
+              currentSection = href.includes('#') ? href.split('#')[1] : href.slice(1);
               break;
             }
           }
@@ -115,6 +124,7 @@ const Navbar = () => {
           <Link
             to="/"
             onClick={(e) => {
+              if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
               e.preventDefault();
               if (location.pathname !== '/') {
                 navigate('/');

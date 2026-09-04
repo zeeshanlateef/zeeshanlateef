@@ -31,6 +31,7 @@ const Footer = () => {
   }, []);
 
   const handleScrollToTop = (e) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
     e.preventDefault();
     window.scrollTo({
       top: 0,
@@ -39,6 +40,7 @@ const Footer = () => {
   };
 
   const handleScrollTo = (e, id) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
     e.preventDefault();
     const target = document.querySelector(id);
     if (target) {
@@ -61,7 +63,7 @@ const Footer = () => {
         {/* Brand / Name */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1">
           <a
-            href="#home"
+            href="/"
             onClick={handleScrollToTop}
             className="font-display font-bold text-lg text-white hover:text-primary transition-colors tracking-tight flex items-center gap-1.5"
           >
@@ -74,11 +76,11 @@ const Footer = () => {
 
         {/* Footer Nav Links */}
         <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2.5 sm:gap-6 text-base text-gray-400 font-medium font-sans">
-          <a href="#about" onClick={(e) => handleScrollTo(e, '#about')} className="hover:text-white transition-colors">About</a>
-          <a href="#skills" onClick={(e) => handleScrollTo(e, '#skills')} className="hover:text-white transition-colors">Skills</a>
-          <a href="#experience" onClick={(e) => handleScrollTo(e, '#experience')} className="hover:text-white transition-colors">Experience</a>
-          <a href="#projects" onClick={(e) => handleScrollTo(e, '#projects')} className="hover:text-white transition-colors">Projects</a>
-          <a href="#contact" onClick={(e) => handleScrollTo(e, '#contact')} className="hover:text-white transition-colors">Contact</a>
+          <a href="/about" className="hover:text-white transition-colors">About</a>
+          <a href="/#skills" onClick={(e) => handleScrollTo(e, '#skills')} className="hover:text-white transition-colors">Skills</a>
+          <a href="/#experience" onClick={(e) => handleScrollTo(e, '#experience')} className="hover:text-white transition-colors">Experience</a>
+          <a href="/projects" className="hover:text-white transition-colors">Projects</a>
+          <a href="/#contact" onClick={(e) => handleScrollTo(e, '#contact')} className="hover:text-white transition-colors">Contact</a>
         </nav>
 
         {/* Right Column: Socials and Scroll To Top inline */}

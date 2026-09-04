@@ -31,6 +31,7 @@ const Hero = () => {
   };
 
   const scrollToSection = (e, id) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
     e.preventDefault();
     const target = document.querySelector(id);
     if (target) {
@@ -139,7 +140,7 @@ const Hero = () => {
 
             {/* Priority #2: View Portfolio */}
             <a
-              href="#projects"
+              href="/#projects"
               onClick={(e) => scrollToSection(e, '#projects')}
               className="w-full sm:w-auto px-8 py-3.5 glass-panel border border-white/15 text-white hover:border-primary/50 hover:bg-primary/10 text-sm sm:text-base font-semibold rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group"
             >
@@ -149,7 +150,7 @@ const Hero = () => {
 
             {/* Priority #3: Contact Me */}
             <a
-              href="#contact"
+              href="/#contact"
               onClick={(e) => scrollToSection(e, '#contact')}
               className="w-full sm:w-auto px-6 py-3.5 text-gray-300 hover:text-white text-sm sm:text-base font-medium rounded-full hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-1.5"
             >
