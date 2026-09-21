@@ -28,6 +28,24 @@ const AllProjects = () => {
   };
 
   const filteredProjects = projects.filter((project) => {
+    const cleanQuery = searchQuery.trim().toLowerCase();
+
+    // Multi-word intelligent search matching
+    let matchesSearch = true;
+    if (cleanQuery) {
+      const searchTokens = cleanQuery.split(/\s+/);
+      const searchableText = [
+        project.title,
+        project.description,
+        project.category,
+        ...project.techStack,
+        project.liveLink
+      ].join(' ').toLowerCase();
+
+      matchesSearch = searchTokens.every(token => searchableText.includes(token));
+    }
+
+    // Category tab filter matching
     let matchesCategory = false;
     if (selectedCategory === 'All') {
       matchesCategory = true;
@@ -42,12 +60,12 @@ const AllProjects = () => {
       matchesCategory = project.category.toLowerCase() === selectedCategory.toLowerCase();
     }
 
-    const matchesSearch =
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.techStack.some((tech) => tech.toLowerCase().includes(searchQuery.toLowerCase()));
+    // When searching, return all relevant results across entire portfolio
+    if (cleanQuery.length > 0) {
+      return matchesSearch;
+    }
 
-    return matchesCategory && matchesSearch;
+    return matchesCategory;
   });
 
   return (
