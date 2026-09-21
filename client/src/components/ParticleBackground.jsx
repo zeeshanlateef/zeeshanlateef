@@ -77,8 +77,7 @@ const ParticleBackground = () => {
     const initParticles = () => {
       particles = [];
       const isMobile = window.innerWidth < 768;
-      // Increased particle count for a rich, high-density constellation
-      const count = isMobile ? 60 : 140;
+      const count = isMobile ? 35 : 75;
 
       for (let i = 0; i < count; i++) {
         const x = Math.random() * canvas.width;
@@ -90,15 +89,17 @@ const ParticleBackground = () => {
     const drawLines = () => {
       const isMobile = window.innerWidth < 768;
       const maxDistance = isMobile ? 90 : 130;
+      const maxDistanceSq = maxDistance * maxDistance;
       const light = isLightMode();
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (distance < maxDistance) {
+          if (distSq < maxDistanceSq) {
+            const distance = Math.sqrt(distSq);
             const alpha = (1 - distance / maxDistance) * (light ? 0.22 : 0.18);
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -115,6 +116,11 @@ const ParticleBackground = () => {
     };
 
     const animate = () => {
+      if (document.visibilityState === 'hidden') {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {

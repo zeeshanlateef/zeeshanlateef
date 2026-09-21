@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 
 const Preloader = ({ finishLoading }) => {
   useEffect(() => {
-    // Automatically trigger page reveal after 3 seconds for a relaxed, premium experience
+    // Reveal page after 1.2s for optimal speed and smooth animation
     const timer = setTimeout(() => {
       finishLoading();
-    }, 3000);
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, [finishLoading]);

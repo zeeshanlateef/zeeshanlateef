@@ -67,6 +67,7 @@ export const AnimatedSocial = ({ href, icon: Icon, label, colorClass = 'hover:bo
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={label}
       className={`flex items-center justify-center h-12 w-12 hover:w-36 px-3 bg-white/5 border border-white/5 text-gray-400 hover:text-white rounded-full transition-all duration-300 ease-out group select-none ${colorClass}`}
     >
       <div className="flex items-center gap-2">

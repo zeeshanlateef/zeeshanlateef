@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './sections/Footer';
 import Home from './pages/Home';
-import AllProjects from './pages/AllProjects';
-import AboutDetails from './pages/AboutDetails';
 import Preloader from './components/Preloader';
 import SEO from './components/SEO';
 import { WhatsappIcon } from './components/SocialIcons';
 import { ThemeProvider } from './context/ThemeContext';
+
+const AllProjects = lazy(() => import('./pages/AllProjects'));
+const AboutDetails = lazy(() => import('./pages/AboutDetails'));
 
 // Helper component to reset scroll position on route navigation
 const ScrollToTop = () => {
@@ -44,11 +45,13 @@ function App() {
         <Navbar />
         
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<AboutDetails />} />
-            <Route path="/projects" element={<AllProjects />} />
-          </Routes>
+          <Suspense fallback={<div className="min-h-screen bg-[#05050a]" />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<AboutDetails />} />
+              <Route path="/projects" element={<AllProjects />} />
+            </Routes>
+          </Suspense>
         </main>
 
         {/* Floating WhatsApp Widget */}

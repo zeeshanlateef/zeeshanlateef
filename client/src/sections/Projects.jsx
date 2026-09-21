@@ -5,112 +5,10 @@ import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
 import { GithubIcon } from '../components/SocialIcons';
 import ParticleBackground from '../components/ParticleBackground';
-
-// Featured homepage fallback projects (9)
-const fallbackProjects = [
-  {
-    title: 'HRMS (Human Resource Management System)',
-    description: 'Developed a lightweight HRMS application to manage employee records and attendance. Implemented employee CRUD operations with validation and unique ID handling. Built attendance tracking with date and status management.',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
-    thumbnail: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://hrms-lite-orpin-delta.vercel.app/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Full Stack',
-    featured: true,
-    order: 1
-  },
-  {
-    title: 'Inventory & Order Management System',
-    description: 'Developed full-stack Inventory Management System for managing products, customers, orders, and stock. Built a responsive React frontend with dashboard insights and order management features. Developed FastAPI-based REST APIs with PostgreSQL integration and automated inventory updates.',
-    techStack: ['React.js', 'Python', 'FastAPI', 'PostgreSQL', 'Docker', 'REST API'],
-    thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://inventory-mgmt-system-mu.vercel.app/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Full Stack',
-    featured: true,
-    order: 2
-  },
-  {
-    title: 'E-Commerce Website',
-    description: 'Developed a full-stack e-commerce platform using PHP, Laravel, Blade, and MySQL. Built cart, checkout, Buy Now, and order management features. Integrated PhonePe Payment Gateway for secure payments. Developed Admin Panel for products, customers, orders, and inventory.',
-    techStack: ['PHP', 'Laravel', 'Blade', 'MySQL', 'Bootstrap', 'JavaScript'],
-    thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://drayury.com/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Laravel / PHP',
-    featured: true,
-    order: 3
-  },
-  {
-    title: 'Split Expense Management System (Splitwise Clone)',
-    description: 'Built a web application for managing shared expenses and balances. Track shared group expenses, view detailed net balances between members, and log settlements.',
-    techStack: ['React.js', 'Node.js', 'Express.js', 'MongoDB'],
-    thumbnail: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://split-app-delta.vercel.app/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Full Stack',
-    featured: true,
-    order: 4
-  },
-  {
-    title: 'White Feature Cab',
-    description: 'A premium car rental and transfer booking portal. Features dynamic route selector, fleet cataloging, customizable travel parameters, and instant contact booking details.',
-    techStack: ['PHP', 'Laravel', 'MySQL', 'Tailwind CSS', 'JavaScript'],
-    thumbnail: 'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://cabscoaches.com/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Laravel / PHP',
-    featured: true,
-    order: 5
-  },
-  {
-    title: 'Sol Cones',
-    description: 'A responsive and polished business portal showcasing Sol Cones products. Optimized layouts for cross-device compatibility, featuring interactive catalog displays.',
-    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
-    thumbnail: 'https://images.unsplash.com/photo-1590483736622-39da8af7ff8f?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://solcones.com/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Frontend',
-    featured: true,
-    order: 6
-  },
-  {
-    title: 'Sol Maximus',
-    description: 'A modern, optimized web portal for solar power solutions. Features solar savings estimation widgets, premium dark layout systems, and fast loading performance.',
-    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS'],
-    thumbnail: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://solmaximus.com/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Frontend',
-    featured: true,
-    order: 7
-  },
-  {
-    title: 'WetooMedia Foundation',
-    description: 'A clean, premium portal for the WetooMedia nonprofit organization. Supports dynamic campaign listings, media galleries, contact forms, and animated UI cards.',
-    techStack: ['React.js', 'Tailwind CSS', 'Framer Motion', 'JavaScript'],
-    thumbnail: 'https://images.unsplash.com/photo-1460518451285-97b6ba32ee61?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://www.wetoomedia.com/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Frontend',
-    featured: true,
-    order: 8
-  },
-  {
-    title: 'Sohan Rai Public School',
-    description: 'An educational institution portal. Features student admissions enrollment tracking, academic event calendars, contact directories, and interactive galleries.',
-    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
-    thumbnail: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&auto=format&fit=crop&q=60',
-    liveLink: 'https://sohanraipublicschool.com/',
-    githubLink: 'https://github.com/zeeshanlateef',
-    category: 'Frontend',
-    featured: true,
-    order: 9
-  }
-];
+import { projectsData } from '../data/projectsData';
 
 const Projects = () => {
-  const [projects] = useState(fallbackProjects);
+  const [projects] = useState(projectsData);
   const [failedImages, setFailedImages] = useState({});
 
   const handleImageError = (projectTitle) => {
@@ -209,6 +107,10 @@ const Projects = () => {
                           src={project.thumbnail}
                           alt={project.title}
                           onError={() => handleImageError(project.title)}
+                          loading="lazy"
+                          decoding="async"
+                          width="600"
+                          height="337"
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       )}
@@ -233,6 +135,7 @@ const Projects = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
+                          aria-label={`View ${project.title} Source Code on GitHub`}
                           className="action-btn p-3 bg-white/10 border border-white/15 hover:bg-primary hover:text-black rounded-full transition-all duration-300 text-white"
                           title="GitHub Source Code"
                         >
@@ -245,6 +148,7 @@ const Projects = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
+                          aria-label={`Visit ${project.title} Live Website`}
                           className="action-btn p-3 bg-white/10 border border-white/15 hover:bg-secondary hover:text-white rounded-full transition-all duration-300 text-white"
                           title="Live Demo"
                         >

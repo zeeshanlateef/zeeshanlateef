@@ -278,6 +278,7 @@ const Navbar = () => {
                   href="https://github.com/zeeshanlateef"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <GithubIcon className="w-6 h-6" />
@@ -286,6 +287,7 @@ const Navbar = () => {
                   href="https://linkedin.com/in/zeeshanlateef"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   <LinkedinIcon className="w-6 h-6" />
