@@ -11,6 +11,9 @@ import { ThemeProvider } from './context/ThemeContext';
 
 const AllProjects = lazy(() => import('./pages/AllProjects'));
 const AboutDetails = lazy(() => import('./pages/AboutDetails'));
+const SkillsPage = lazy(() => import('./pages/SkillsPage'));
+const ExperiencePage = lazy(() => import('./pages/ExperiencePage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 // Helper component to reset scroll position on route navigation
 const ScrollToTop = () => {
@@ -49,7 +52,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<AboutDetails />} />
+              <Route path="/skills" element={<SkillsPage />} />
+              <Route path="/experience" element={<ExperiencePage />} />
               <Route path="/projects" element={<AllProjects />} />
+              <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </Suspense>
         </main>

@@ -127,15 +127,15 @@ const AboutDetails = () => {
             <div className="glass-panel p-8 rounded-2xl border border-white/10 space-y-4">
               <h2 className="text-2xl font-display font-bold text-white flex items-center gap-3">
                 <Code2 className="w-6 h-6 text-primary" />
-                Professional Profile Summary
+                About Me
               </h2>
               
               <p className="text-gray-300 font-sans leading-relaxed text-sm sm:text-base">
-                I am a **Full Stack Software Developer** with 2+ years of hands-on experience building scalable web applications. My core technical expertise spans full-stack PHP (Laravel) architectures, React.js frontend applications, Node.js REST services, and MySQL database engineering.
+                I am a **Full Stack Developer** with 2+ years of experience building web applications. My core expertise is in PHP, Laravel, React.js, JavaScript, and MySQL database management.
               </p>
 
               <p className="text-gray-300 font-sans leading-relaxed text-sm sm:text-base">
-                I prioritize writing clean, modular, and maintainable code. Incorporating **Vibe Coding** workflows (leveraging modern developer tooling and agentic AI assistants), I accelerate prototype-to-production deployment cycles while maintaining high standards for security, speed, and cross-browser responsiveness.
+                I focus on writing clean code, building responsive interfaces, and integrating secure REST APIs. I also use modern AI developer tools to speed up debugging, testing, and feature implementation.
               </p>
             </div>
 

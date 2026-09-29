@@ -7,10 +7,10 @@ import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
   { name: 'About', path: '/about' },
-  { name: 'Skills', href: '/#skills' },
-  { name: 'Experience', href: '/#experience' },
+  { name: 'Skills', path: '/skills' },
+  { name: 'Experience', path: '/experience' },
   { name: 'Projects', path: '/projects' },
-  { name: 'Contact', href: '/#contact' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 const resumeUrl = "/assets/resume-zeeshanlateef.pdf";
@@ -78,36 +78,20 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      if (location.pathname === '/') {
-        const sections = navLinks.filter(l => l.href).map(link => {
-          const targetId = link.href.includes('#') ? `#${link.href.split('#')[1]}` : link.href;
-          return document.querySelector(targetId);
-        });
-        const scrollPosition = window.scrollY + 120;
-        let currentSection = '';
-
-        for (let i = 0; i < sections.length; i++) {
-          const section = sections[i];
-          if (section) {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
-            if (scrollPosition >= top && scrollPosition < top + height) {
-              const href = navLinks.filter(l => l.href)[i].href;
-              currentSection = href.includes('#') ? href.split('#')[1] : href.slice(1);
-              break;
-            }
-          }
-        }
-        setActiveSection(currentSection);
-      } else if (location.pathname === '/about') {
-        setActiveSection('about');
-      } else if (location.pathname === '/projects') {
-        setActiveSection('projects');
+      const path = location.pathname;
+      if (path === '/') {
+        setActiveSection('home');
       } else {
-        setActiveSection('');
+        const matchingLink = navLinks.find(l => l.path === path);
+        if (matchingLink) {
+          setActiveSection(matchingLink.name.toLowerCase());
+        } else {
+          setActiveSection('');
+        }
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);

@@ -8,14 +8,29 @@ const seoData = {
     keywords: 'Zeeshan Lateef Portfolio, Zeeshan Lateef, Zeeshan Developer, Zeeshan Full Stack Developer, Zeeshan Lateef Software Developer, Full Stack Developer, Software Developer, PHP Developer, Laravel Developer, React Developer, Vibe Coding, MERN Stack, Delhi Developer'
   },
   '/about': {
-    title: 'About Zeeshan Lateef | Zeeshan Developer Profile & Experience',
-    description: 'Official Zeeshan Lateef Profile — Full Stack Developer & Computer Science Engineer with experience at Ahmad Web Solutions, Abtus World, and Zynextro Software.',
-    keywords: 'Zeeshan Lateef, Zeeshan Lateef Portfolio, About Zeeshan Lateef, Zeeshan Developer, Full Stack Developer Profile, Laravel Software Engineer, B.Tech CSE CGPA 8.22'
+    title: 'About Zeeshan Lateef | Full Stack Developer Profile',
+    description: 'Learn more about Zeeshan Lateef — Full Stack Software Developer with 2+ years of experience in PHP, Laravel, React.js, and MySQL.',
+    keywords: 'Zeeshan Lateef, About Zeeshan Lateef, Zeeshan Developer, Full Stack Developer, Laravel Engineer, Computer Science Graduate'
+  },
+  '/skills': {
+    title: 'Skills & Tech Stack | Zeeshan Lateef',
+    description: 'Technical skills, programming languages, backend frameworks, and tools used by Zeeshan Lateef including React.js, PHP, Laravel, MySQL, and Tailwind CSS.',
+    keywords: 'Zeeshan Lateef Skills, Technical Stack, PHP, Laravel, React.js, JavaScript, MySQL, Tailwind CSS, Web Development'
+  },
+  '/experience': {
+    title: 'Work Experience | Zeeshan Lateef',
+    description: 'Professional work history of Zeeshan Lateef as a Full Stack & Frontend Developer at Ahmad Web Solutions, Abtus World, and Zynextro Software.',
+    keywords: 'Zeeshan Lateef Experience, Work History, Software Engineer Jobs, Full Stack Developer Delhi, Laravel Developer Experience'
   },
   '/projects': {
-    title: 'Zeeshan Lateef Portfolio Projects | Zeeshan Developer Applications',
-    description: 'Explore 30+ full stack web applications, Laravel portals, React.js frontends, and REST API systems built by Zeeshan Lateef.',
-    keywords: 'Zeeshan Lateef Portfolio, Zeeshan Lateef Projects, Zeeshan Developer Projects, HRMS Lite, Laravel E-Commerce, React Projects, Inventory Management System, FastAPI Python, Full Stack Applications'
+    title: 'Projects & Work | Zeeshan Lateef',
+    description: 'Explore full-stack web applications, Laravel portals, and React.js web apps created by Zeeshan Lateef.',
+    keywords: 'Zeeshan Lateef Projects, Web App Portfolio, Laravel Applications, React Projects, Full Stack Portfolio'
+  },
+  '/contact': {
+    title: 'Contact Zeeshan Lateef | Get In Touch',
+    description: 'Get in touch with Zeeshan Lateef for full-stack web development projects, freelance opportunities, or software engineering positions.',
+    keywords: 'Contact Zeeshan Lateef, Hire Zeeshan Lateef, Developer Contact, Delhi Software Engineer, Email Zeeshan'
   }
 };
 

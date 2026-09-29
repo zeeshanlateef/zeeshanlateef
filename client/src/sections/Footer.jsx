@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUp } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, WhatsappIcon, MailIcon, AnimatedSocial } from '../components/SocialIcons';
 
@@ -76,11 +77,11 @@ const Footer = () => {
 
         {/* Footer Nav Links */}
         <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2.5 sm:gap-6 text-base text-gray-400 font-medium font-sans">
-          <a href="/about" className="hover:text-white transition-colors">About</a>
-          <a href="/#skills" onClick={(e) => handleScrollTo(e, '#skills')} className="hover:text-white transition-colors">Skills</a>
-          <a href="/#experience" onClick={(e) => handleScrollTo(e, '#experience')} className="hover:text-white transition-colors">Experience</a>
-          <a href="/projects" className="hover:text-white transition-colors">Projects</a>
-          <a href="/#contact" onClick={(e) => handleScrollTo(e, '#contact')} className="hover:text-white transition-colors">Contact</a>
+          <Link to="/about" className="hover:text-white transition-colors">About</Link>
+          <Link to="/skills" className="hover:text-white transition-colors">Skills</Link>
+          <Link to="/experience" className="hover:text-white transition-colors">Experience</Link>
+          <Link to="/projects" className="hover:text-white transition-colors">Projects</Link>
+          <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
         </nav>
 
         {/* Right Column: Socials and Scroll To Top inline */}

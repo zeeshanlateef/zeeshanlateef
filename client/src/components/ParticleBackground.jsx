@@ -32,13 +32,14 @@ const ParticleBackground = () => {
         this.baseSpeedY = (Math.random() - 0.5) * 0.45;
         this.speedX = this.baseSpeedX;
         this.speedY = this.baseSpeedY;
+        this.isPrimary = Math.random() > 0.5;
       }
 
-      getColor() {
-        if (isLightMode()) {
-          return Math.random() > 0.5 ? 'rgba(2, 132, 199, 0.55)' : 'rgba(124, 58, 237, 0.55)';
+      getColor(light) {
+        if (light) {
+          return this.isPrimary ? 'rgba(2, 132, 199, 0.55)' : 'rgba(124, 58, 237, 0.55)';
         }
-        return Math.random() > 0.5 ? 'rgba(0, 210, 255, 0.5)' : 'rgba(155, 81, 224, 0.5)';
+        return this.isPrimary ? 'rgba(0, 210, 255, 0.5)' : 'rgba(155, 81, 224, 0.5)';
       }
 
       update() {
@@ -66,10 +67,10 @@ const ParticleBackground = () => {
         if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
       }
 
-      draw() {
+      draw(light) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.getColor();
+        ctx.fillStyle = this.getColor(light);
         ctx.fill();
       }
     }
@@ -123,9 +124,10 @@ const ParticleBackground = () => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      const light = isLightMode();
       particles.forEach((particle) => {
         particle.update();
-        particle.draw();
+        particle.draw(light);
       });
 
       drawLines();
