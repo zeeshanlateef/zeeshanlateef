@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, FileText, Code2, Server, Terminal, Sparkles, GraduationCap, Briefcase, CheckCircle2, MapPin, Mail, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ParticleBackground from '../components/ParticleBackground';
+import CtaBanner from '../components/CtaBanner';
 
 const AboutDetails = () => {
   useEffect(() => {
@@ -131,7 +132,7 @@ const AboutDetails = () => {
               </h2>
               
               <p className="text-gray-300 font-sans leading-relaxed text-sm sm:text-base">
-                I am a **Full Stack Developer** with 2+ years of experience building web applications. My core expertise is in PHP, Laravel, React.js, JavaScript, and MySQL database management.
+                I am a <strong className="font-bold text-white">Full Stack Developer</strong> with 2+ years of experience building web applications. My core expertise is in PHP, Laravel, React.js, JavaScript, and MySQL database management.
               </p>
 
               <p className="text-gray-300 font-sans leading-relaxed text-sm sm:text-base">
@@ -283,28 +284,14 @@ const AboutDetails = () => {
 
         </div>
 
-        {/* Bottom Call to Action */}
-        <div className="glass-panel p-10 rounded-3xl border border-white/10 text-center max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl font-display font-bold text-white">Let's Connect & Build</h2>
-          <p className="text-gray-300 max-w-xl mx-auto text-sm sm:text-base">
-            Open for full-stack engineering opportunities, Laravel development, or React frontend positions.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-2">
-            <Link
-              to="/#contact"
-              className="btn-primary-custom px-8 py-3.5 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer shadow-md"
-            >
-              Contact Me
-            </Link>
-            <button
-              onClick={handleResumeClick}
-              className="px-8 py-3.5 border border-white/15 text-white font-bold rounded-full hover:bg-white/5 transition-all duration-300 flex items-center gap-2 cursor-pointer"
-            >
-              <FileText className="w-4 h-4" />
-              Download Resume
-            </button>
-          </div>
-        </div>
+        {/* Bottom Call to Action taking full container width */}
+        <CtaBanner
+          heading="Let's Connect & Build Together"
+          primaryBtnText="Contact Me"
+          primaryBtnLink="/contact"
+          showSecondary={true}
+          secondaryBtnText="Download Resume"
+        />
 
       </div>
     </div>

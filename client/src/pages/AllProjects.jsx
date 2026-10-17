@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Search, ArrowLeft, ExternalLink, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
 import { GithubIcon } from '../components/SocialIcons';
 import ParticleBackground from '../components/ParticleBackground';
+import CtaBanner from '../components/CtaBanner';
 import { projectsData } from '../data/projectsData';
 
 const categories = ['All', 'Featured', 'Full Stack', 'Laravel / PHP', 'Frontend'];
@@ -265,6 +266,15 @@ const AllProjects = () => {
             </button>
           </div>
         )}
+
+        {/* Bottom CTA taking full container width */}
+        <CtaBanner
+          heading="Have a Project in Mind?"
+          primaryBtnText="Contact Me"
+          primaryBtnLink="/contact"
+          showSecondary={true}
+          secondaryBtnText="Download Resume"
+        />
       </div>
     </div>
   );

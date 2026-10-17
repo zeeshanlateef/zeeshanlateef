@@ -115,7 +115,7 @@ const About = () => {
             >
               <h3 className="text-2xl font-display font-bold text-white mb-4">Professional Overview</h3>
               <p className="text-gray-400 leading-relaxed font-sans mb-4">
-                I am a Full Stack Developer with 2+ years of hands-on experience crafting robust web applications. My tech stack includes PHP (Laravel), React.js, Node.js (Express), and MySQL database architectures alongside modern Vibe Coding workflows to deliver high quality code efficiently.
+                I am a <strong className="font-bold text-white">Full Stack Developer</strong> with 2+ years of hands-on experience crafting robust web applications. My tech stack includes PHP (Laravel), React.js, Node.js (Express), and MySQL database architectures alongside modern Vibe Coding workflows to deliver high quality code efficiently.
               </p>
               <p className="text-gray-400 leading-relaxed font-sans mb-6">
                 From developing dynamic client management systems to custom e-commerce portals and responsive React frontends, I focus on clean architecture, performance optimization, and seamless user experiences.

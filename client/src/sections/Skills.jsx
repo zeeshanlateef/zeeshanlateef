@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Layout, Server, Database, Wrench, Languages, Code2 } from 'lucide-react';
+import { Layout, Server, Database, Wrench, Code2 } from 'lucide-react';
 import TiltCard from '../components/TiltCard';
 import ParticleBackground from '../components/ParticleBackground';
 

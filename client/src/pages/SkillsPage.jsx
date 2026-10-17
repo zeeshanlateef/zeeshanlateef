@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Sparkles, Layout, Server, Database, Wrench, Code2, Cpu, Zap, Layers, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Sparkles, Layout, Server, Database, Wrench, Code2, Cpu, Zap, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ParticleBackground from '../components/ParticleBackground';
 import TiltCard from '../components/TiltCard';
+import CtaBanner from '../components/CtaBanner';
 
 const skillCategories = [
   {
@@ -273,30 +274,15 @@ const SkillsPage = () => {
           </div>
         </div>
 
-        {/* CTA Footer Card */}
-        <div className="glass-panel p-10 rounded-3xl border border-white/10 text-center max-w-4xl mx-auto relative overflow-hidden">
-          <div className="relative z-10 space-y-6">
-            <h2 className="text-3xl font-display font-bold text-white">Need a Full Stack Developer for Your Project?</h2>
-            <p className="text-gray-300 max-w-xl mx-auto text-sm sm:text-base">
-              I am open for full-time developer roles, Laravel backend projects, and React frontend work.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 pt-2">
-              <Link
-                to="/contact"
-                className="btn-primary-custom px-8 py-3.5 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer shadow-md flex items-center gap-2"
-              >
-                Let's Talk
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/projects"
-                className="px-8 py-3.5 border border-white/15 text-white font-bold rounded-full hover:bg-white/5 transition-all duration-300 flex items-center gap-2 cursor-pointer"
-              >
-                See My Projects
-              </Link>
-            </div>
-          </div>
-        </div>
+        {/* CTA Footer Card taking full container width */}
+        <CtaBanner
+          heading="Need a Full Stack Developer?"
+          primaryBtnText="Let's Talk"
+          primaryBtnLink="/contact"
+          showSecondary={true}
+          secondaryBtnText="See Projects"
+          secondaryBtnLink="/projects"
+        />
 
       </div>
     </div>

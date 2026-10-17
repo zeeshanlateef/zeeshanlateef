@@ -5,30 +5,80 @@ import { GithubIcon, LinkedinIcon, WhatsappIcon, MailIcon, AnimatedSocial } from
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const [visitorCount, setVisitorCount] = React.useState('...');
+  const [visitorCount, setVisitorCount] = React.useState(() => {
+    try {
+      const stored = localStorage.getItem('zl_visitor_count');
+      if (stored) {
+        const parsed = parseInt(stored, 10);
+        if (!isNaN(parsed)) return parsed.toLocaleString();
+      }
+    } catch {
+      // Safe fallback
+    }
+    return '14,832';
+  });
 
   React.useEffect(() => {
-    const getCounter = async () => {
+    let isMounted = true;
+
+    const syncCounter = async () => {
+      const token = import.meta.env.VITE_COUNTER_API_TOKEN || 'ut_hvdRMG3a4uxMP0IyRBkY9VnVIy29cXalrM7bB6DM';
+      const workspace = import.meta.env.VITE_COUNTER_WORKSPACE || 'zeeshanlateef';
+      const counterName = import.meta.env.VITE_COUNTER_NAME || 'portfolio';
+
+      const hasIncremented = sessionStorage.getItem('zl_visit_recorded');
+      const endpoint = hasIncremented
+        ? `https://api.counterapi.dev/v2/${workspace}/${counterName}`
+        : `https://api.counterapi.dev/v2/${workspace}/${counterName}/up`;
+
       try {
-        const response = await fetch('https://api.counterapi.dev/v2/zeeshanlateef/portfolio/up');
-        if (!response.ok) throw new Error('API Error');
-        const data = await response.json();
-        if (data && typeof data.value === 'number') {
-          setVisitorCount(data.value.toLocaleString());
-          return;
+        const response = await fetch(endpoint, {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
+
+        if (response.ok) {
+          const resData = await response.json();
+          const count = resData?.data?.up_count ?? resData?.up_count ?? resData?.value;
+          if (typeof count === 'number' && isMounted) {
+            setVisitorCount(count.toLocaleString());
+            sessionStorage.setItem('zl_visit_recorded', 'true');
+            localStorage.setItem('zl_visitor_count', count.toString());
+            return;
+          }
         }
-      } catch (err) {
-        // Fallback calculations in case of API downtime: Baseline 14,832 + visits since base date
+      } catch {
+        // Fallback to local baseline counter
+      }
+
+      // Dynamic fallback when API workspace is offline or pending dashboard setup
+      try {
         const baseCount = 14832;
         const startDate = new Date('2026-08-01T00:00:00Z').getTime();
-        const now = Date.now();
-        const visitsPerDay = 15;
-        const daysElapsed = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
-        const estimatedCount = baseCount + Math.max(0, daysElapsed * visitsPerDay);
-        setVisitorCount(estimatedCount.toLocaleString());
+        const daysElapsed = Math.floor((Date.now() - startDate) / (1000 * 60 * 60 * 24));
+        let count = baseCount + Math.max(0, daysElapsed * 15);
+        const stored = localStorage.getItem('zl_visitor_count');
+        if (stored) {
+          const parsed = parseInt(stored, 10);
+          if (!isNaN(parsed) && parsed >= count) count = parsed;
+        }
+        if (!hasIncremented) {
+          count += 1;
+          sessionStorage.setItem('zl_visit_recorded', 'true');
+          localStorage.setItem('zl_visitor_count', count.toString());
+        }
+        if (isMounted) {
+          setVisitorCount(count.toLocaleString());
+        }
+      } catch {
+        // Storage restricted
       }
     };
-    getCounter();
+
+    syncCounter();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleScrollToTop = (e) => {
@@ -38,21 +88,6 @@ const Footer = () => {
       top: 0,
       behavior: 'smooth'
     });
-  };
-
-  const handleScrollTo = (e, id) => {
-    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
-    e.preventDefault();
-    const target = document.querySelector(id);
-    if (target) {
-      const offset = 80;
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
   };
 
   return (

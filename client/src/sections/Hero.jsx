@@ -45,7 +45,7 @@ const Hero = () => {
     }
   };
 
-  const handleResumeClick = (e) => {
+  const handleResumeClick = () => {
     const downloadAnchor = document.createElement('a');
     downloadAnchor.href = "/assets/resume-zeeshanlateef.pdf";
     downloadAnchor.setAttribute('download', 'resume-zeeshanlateef.pdf');

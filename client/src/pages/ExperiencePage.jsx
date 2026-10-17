@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Sparkles, Briefcase, Calendar, MapPin, Building2, CheckCircle2, Award, Download, ArrowRight, FileText } from 'lucide-react';
+import { ArrowLeft, Sparkles, Calendar, MapPin, Building2, CheckCircle2, Award, Download, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ParticleBackground from '../components/ParticleBackground';
 import TiltCard from '../components/TiltCard';
+import CtaBanner from '../components/CtaBanner';
 
 const detailedExperiences = [
   {
@@ -283,29 +284,14 @@ const ExperiencePage = () => {
           </div>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="glass-panel p-10 rounded-3xl border border-white/10 text-center max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl font-display font-bold text-white">Looking to Hire a Full Stack Developer?</h2>
-          <p className="text-gray-300 max-w-xl mx-auto text-sm sm:text-base">
-            I am available for full-time positions, Laravel projects, and React frontend contracts.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-2">
-            <Link
-              to="/contact"
-              className="btn-primary-custom px-8 py-3.5 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer shadow-md flex items-center gap-2"
-            >
-              Get In Touch
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <button
-              onClick={handleResumeClick}
-              className="px-8 py-3.5 border border-white/15 text-white font-bold rounded-full hover:bg-white/5 transition-all duration-300 flex items-center gap-2 cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              Download Resume
-            </button>
-          </div>
-        </div>
+        {/* Bottom CTA taking full container width */}
+        <CtaBanner
+          heading="Ready to Build Something Great?"
+          primaryBtnText="Get In Touch"
+          primaryBtnLink="/contact"
+          showSecondary={true}
+          secondaryBtnText="Download Resume"
+        />
 
       </div>
     </div>

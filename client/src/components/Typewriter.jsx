@@ -33,9 +33,10 @@ const Typewriter = ({
     } 
     // Handle complete deletion of a phrase
     else if (isDeleting && currentText === '') {
-      setIsDeleting(false);
-      setPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
-      timer = setTimeout(() => {}, delayBeforeType);
+      timer = setTimeout(() => {
+        setIsDeleting(false);
+        setPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+      }, delayBeforeType);
     }
 
     return () => clearTimeout(timer);
